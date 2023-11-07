@@ -1,0 +1,22 @@
+answer = Random(0, 100);
+IATab = ['min' => 0, 'max' => 100]
+tentatives = 0
+Faire{
+    Si(tentatives%2 == 0) alors {
+        Afficher(Devinez le nombre : )
+        Lire(guess)
+    } Sinon {
+        guess = Random(IATab[min]+1, IATab[max])
+    }
+    Afficher(chiffre rentré est <guess>)
+    Si(answer > guess) alors {
+        Afficher(Plus grand)
+        IATab['min'] = guess
+    } ou Si (answer < guess) {
+        Afficher(Plus petit)
+        IATab['max'] = guess
+    }
+    tentatives = tentatives + 1
+} Tant que (guess != answer)
+
+Afficher(Bravo vous avez trouvé)

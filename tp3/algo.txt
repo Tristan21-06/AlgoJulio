@@ -1,0 +1,52 @@
+alphabetUp = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+alphabetLow = "abcdefghijklmnopqrstuvwxyz";
+
+low = toArray(alphabetLow)
+up = toArray(alphabetUp)
+
+Faire {
+    Afficher(0 - arreter )
+    Afficher(1 - chiffrer )
+    Afficher(2 - déchiffrer )
+    Lire(choix)
+
+    switch(choix){
+        case 1 :
+            Afficher(chaine a chiffrer)
+            Lire(chaine)
+            Afficher(pas pour chiffrer)
+            Lire(pas)
+
+            tab = toArray(chaine)
+
+            Pour chaque (tab en tant que el) {
+                Si(el == tolowercase(el)) alors {
+                    el = low[26+(pas%26)];
+                }else{
+                    el = up[26+(pas%26)];
+                }
+            }
+
+            newchaine = toString(tab)
+            Afficher(Chaine chiffrée : <newchaine>)
+
+        case 2 :
+            Afficher(chaine a déchiffrer)
+            Lire(chaine)
+            Afficher(pas pour déchiffrer)
+            Lire(pas)
+
+            tab = toArray(chaine)
+
+            Pour chaque (tab en tant que el) {
+                Si(el == tolowercase(el)) alors {
+                    el = low[26-(pas%26)];
+                }else{
+                    el = up[26-(pas%26)];
+                }
+            }
+
+            newchaine = toString(tab)
+            Afficher(Chaine déchiffrée : <newchaine>)
+    }
+} Tant que (choix != 0)

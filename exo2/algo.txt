@@ -1,0 +1,6 @@
+Faire{
+    Afficher(Votre nombre (stop pour arreter): )
+    Lire(nombre)
+} Tant que (nombre != stop)
+
+Afficher(Arrêt du programme)

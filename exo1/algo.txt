@@ -1,0 +1,10 @@
+Afficher(Nom d'utilisateur : ) 
+Lire(user)
+Afficher(Mot de passe : ) 
+Lire(pwd)
+
+Afficher(Vos identifiants sont : )
+Afficher(Utilisateur : ) 
+Afficher(user)
+Afficher(Mot de passe : ) 
+Afficher(pwd)
