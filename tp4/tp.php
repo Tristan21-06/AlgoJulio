@@ -1,6 +1,8 @@
 <?php
 
 /*
+Le joueur qui prend le dernier bâtonnet gagne
+
 nbBatonnets = 20
 tours = 0
 dernierCoup = [valeur => 0, joueur => "utilisateur"]
@@ -33,19 +35,20 @@ Faire {
 Afficher(L'<dernierCoup['joueur']> a gagné)
 */
 
+print("Le joueur qui prend le dernier bâtonnet gagne");
 $nbSticks = 20;
 $turns = 0;
 $lastPlay = array('value' => 0, 'player' => "utilisateur");
-
+$out = 0;
 do{
     if ($turns%2 == 0) {
         $take = readline("Entrer un nombre de batonnets a prendre (1 à 3) : ");
         $player = 'utilisateur';
     } else {
-        $take = 5 - $lastPlay['value'];
+        $take = 4 - $lastPlay['value'];
         $player = 'ordinateur';
     }
-
+    
     if($take > 0 && $take < 4){
         $lastPlay['value'] = $take;
         $lastPlay['player'] = $player;
@@ -56,9 +59,10 @@ do{
 
         $turns++;
     } else {
+        $out++;
         print("Valeur interdite, veuillez réessayer...\n");
     }
-} while($nbSticks);
+} while($nbSticks && $out < 15);
 
 print("L'" . $lastPlay['player'] . " a gagné\n");
 

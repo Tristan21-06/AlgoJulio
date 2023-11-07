@@ -1,0 +1,40 @@
+maxTentatives = 10
+
+Afficher(Choisir un mot)
+Lire(mot)
+
+motTab = toArray(mot)
+tentativeTab = array
+trouveLettre = array
+Pour ( i = 0 ; i < taille(motTab) ; i++ ) {
+    tentativeTab[i] = '_'
+    trouveLettre[i] = False
+}
+
+motTrouve = False
+Tant que ( not motTrouve ET nbErreurs != maxErreurs) {
+    pasErreur = False
+    Afficher(Proposez une lettre : )
+    Lire(tentative)
+    Pour chaque ( motTab en tant que (clé, lettre) ) {
+        Si (lettre == tentative){
+            tentativeTab[clé] = lettre
+            trouveLettre[clé] = True
+        }
+        pasErreur = pasErreur || lettre == tentative
+    }
+
+    Pour chaque (trouveLettre en tant que trouve){
+        motTrouve = motTrouve && trouve
+    }
+
+    if (!pasErreur){
+        maxTentatives--
+    }
+}
+
+Si (motTrouve) alors {
+    Afficher("Vous avez gagné ! Le mot était " + mot)
+} ou (maxTentatives == 0) alors {
+    Afficher("Vous avez perdu ! le mot était " + mot)
+}

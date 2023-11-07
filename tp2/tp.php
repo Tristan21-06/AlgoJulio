@@ -60,7 +60,7 @@ do {
     $guesses++;
 } while($guess != $answer);
 
-$guesses = $guesses/2;
+$guesses = intdiv($guesses, 2);
 print("L'$player trouvé en $guesses tentatives\n");
 
 ?>

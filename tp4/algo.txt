@@ -1,3 +1,5 @@
+Le joueur qui prend le dernier bâton gagne
+
 nbBatonnets = 20
 tours = 0
 dernierCoup = [valeur => 0, joueur => "utilisateur"]
