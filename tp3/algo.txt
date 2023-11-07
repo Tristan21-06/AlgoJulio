@@ -19,11 +19,15 @@ Faire {
 
             tab = toArray(chaine)
 
-            Pour chaque (tab en tant que el) {
+            Pour chaque (tab en tant que (clé, el)) {
                 Si(el == tolowercase(el)) alors {
-                    el = low[26+(pas%26)];
+                    index = trouve dans tableau (el, low) +1
+                    target = ($index+pas)%26-1;
+                    tab[clé] = low[target];
                 }else{
-                    el = up[26+(pas%26)];
+                    index = trouve dans tableau (el, up) +1
+                    target = (index+pas)%26-1;
+                    tab[clé] = low[target];
                 }
             }
 
@@ -38,15 +42,32 @@ Faire {
 
             tab = toArray(chaine)
 
-            Pour chaque (tab en tant que el) {
-                Si(el == tolowercase(el)) alors {
-                    el = low[26-(pas%26)];
-                }else{
-                    el = up[26-(pas%26)];
+            Pour chaque (tab en tant que (clé, el)) {
+                Si (el == tolowercase(el)) alors {
+                    index = array_search(el, low)+1;
+                    target = (index-pas)-1;
+
+                    Si (target < 0){
+                        target = 26 - abs(target);
+                    }
+
+                    tab[clé] = low[target];
+                } else {
+                    index = array_search(el, up)+1;
+                    target = (index-pas)-1;
+
+                    Si (target < 0) alors {
+                        target = 26 - abs(target);
+                    }
+
+                    tab[clé] = up[target];
                 }
             }
 
             newchaine = toString(tab)
             Afficher(Chaine déchiffrée : <newchaine>)
+        default :
+            Afficher(Arret du programme)
+            break
     }
 } Tant que (choix != 0)

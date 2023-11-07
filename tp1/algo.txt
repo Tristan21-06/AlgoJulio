@@ -1,4 +1,4 @@
-answer = Random(0, 100);
+answer = Random(0, 100)
 tentatives = 0
 Faire{
     Afficher(Devinez le nombre : )
@@ -8,7 +8,7 @@ Faire{
     } ou Si (answer < guess) {
         Afficher(Plus petit)
     }
-    tentatives = tentatives + 1
+    tentatives = tentatives +1
 } Tant que (guess != answer)
 
 Afficher(Bravo vous avez trouvé)
