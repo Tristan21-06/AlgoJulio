@@ -54,8 +54,6 @@ Si (motTrouve) alors {
 
 */
 
-header('Content-type: text/plain; charset=utf-8');
-
 $ch = curl_init("https://openlexicon.fr/datasets-info/Liste-de-mots-francais-Gutenberg/liste.de.mots.francais.frgut.txt");
 
 curl_setopt($ch, CURLOPT_HEADER, false);
@@ -68,15 +66,11 @@ curl_close($ch);
 $allWords = preg_split('/\r\n|\r|\n/', $allWords);
 $indexWord = rand(0, count($allWords)-1);
 
-foreach ($allWords as $key => $word) {
-    $word = utf8_decode($word);
-    $word = str_replace('?', '', $word);
-    $allWords[$key] = $word;
-}
+$word = $allWords[$indexWord];
+$word = utf8_decode($word);
+$word = str_replace('?', '', $word);
 
 $maxTries = 10;
-
-$word = $allWords[$indexWord];
 
 $wordArray = str_split($word);
 $attemptsArray = array();
