@@ -1,0 +1,161 @@
+grille = array
+catégorie = array(...)
+
+Pour (tour = 1 ; tour <= 13 ; tour++){
+    Afficher(Tour n°<tour>)
+    lancers = 0
+
+    listedes = ''
+    tabDesAGarder = array
+
+    premierLancer = true
+
+    Faire{
+        Si(queDesChiffres(listedes) OU premierLancer OU taille(listedes) < 1) alors {
+            tabListedes = filtrer(séparer(listedes))
+            Pour chaque (tabListedes en tant que de) {
+                tabDesAGarder[] = des[de-1]
+            }
+
+            des = array;
+            Pour (i = 0 ; i < 5 - taille(tabDesAGarder) ; i++) {
+                des[i] = Random(1, 6)
+            }
+
+            Afficher(Résultat des dés : <des>)
+            lancers++
+            Si (lancers < 3) alors {
+                Afficher (1,2,3,4,5 ou all pour tout garder. Par exemple, 134 garde le dé 1, 3 et 4.)
+                Afficher (Lancer <lancers> - Quels dés voulez-vous garder ? )
+                Lire(listedes)
+            } Sinon {
+                Pour chaque (des en tant que de) {
+                    tabDesAGarder[] = de
+                }
+            }
+            premierLancer = False
+        } Sinon Si (listedes != 'all) {
+            Afficher (Vous avez entré une valeur incorrecte. Veuillez rentrer une suite de 1 à 5 (par exemple, 134) ou all pour tout garder)
+        }
+
+        Si (listedes == 'all) {
+            Pour chaque (des en tant que de) {
+                tabDesAGarder[] = de
+            }
+        }
+    } Tant que (lancers < 3 ET listedes != 'all')
+
+    Afficher (Résultat final : <tabDesAGarder>)
+    Afficher (Choisissez une catégorie (catégories disponibles): <categories>)
+
+    Faire {
+
+    } Tant que (!inArray($categorieChoisie, categories) OU cleExiste(categorieChoisie, grille))
+
+    appelFonction = remplacer(' ', '', categorieChoisie)
+    Si (nimeric(categorieChoisie) OU categorieChoisie == 'Chance) alors {
+        grille[categorieChoisie] = autres(tabDesAGarder, categorieChoisie)
+    } Sinon {
+        grille[appelFonction] = tolowercase(appelFonction)(tabDesAGarder, appelFonction)
+    }
+
+}
+
+Afficher(Grille finale : )
+Pour chaque (grille en tant que (categorie, score)) {
+    Afficher(<categorie>: <score>)
+}
+
+fonction autres (tabDesAGarder, categorieChoisie) {
+    score = 0
+    chance = categorie == 'Chance'
+    Pour chaque (tabDesAGarder en tant que de) {
+        Si (de == categorie OU chance) alors {
+            score += de
+        }
+    }
+
+    retourner score
+}
+
+fonction yams (tabDesAGarder, categorieChoisie) {
+    score = 0
+    Si (taille(uniques(tabDesAGarder)) == 1) alors {
+        score = 50
+    }
+
+    retourner score
+}
+
+fonction grandesuite (tabDesAGarder, categorieChoisie) {
+    score = 0
+    Si (taille(uniques(tabDesAGarder)) == 5) alors {
+        score = 40
+    }
+
+    retourner score
+}
+
+fonction petitesuite (tabDesAGarder, categorieChoisie) {
+    score = 0
+    Si (taille(uniques(tabDesAGarder)) >= 4) alors {
+        score = 30
+    }
+
+    retourner score
+}
+
+fonction full (tabDesAGarder, categorieChoisie) {
+    taillesAutorisée = array(3,2)
+
+    retourner calculCategorie(tabDesAGarder, taillesAutorisée, categorieChoisie)
+}
+
+fonction brelan (tabDesAGarder, categorieChoisie) {
+    taillesAutorisée = array(3,1)
+
+    retourner calculCategorie(tabDesAGarder, taillesAutorisée, categorieChoisie)
+}
+
+fonction carre (tabDesAGarder, categorieChoisie) {
+    taillesAutorisée = array(4,1)
+
+    retourner calculCategorie(tabDesAGarder, taillesAutorisée, categorieChoisie)
+}
+
+fonction calculCategorie(tabDesAGarder, taillesAutorisée, categorieChoisie) {
+    score = 0
+    tabDes = array
+    Pour chaque (tabDesAGarder en tant que de) {
+        ajoutTab = filtrer($tabDesAGarder, element == de)
+        Si (!inArray(ajoutTab, tabDes)) alors {
+            tabDes[] = ajoutTab
+        }
+    }
+
+    estCategorie = true
+    Pour chaque (tabDes en tant que tab) {
+        estCategorie = estCategorie && InArray(taille(tab), taillesAutorisée)
+    }
+
+    Si (estCategorie) alors {
+        Si (categorieChoisie == "Brelan" OU categorieChoisie == "Carre") alors {
+            Si (categorieChoisie == "Brelan") alors {
+                nbAutorise = 3
+            } Sinon {
+                nbAutorise = 4
+            }
+            Pour chaque (tabDes en tant que tab) {
+                Si (taille(tab) >= nbAutorise) alors {
+                    Pour chaque (tab en tant que de) {
+                        score += de
+                    }
+                }
+            }
+        } Sinon Si (categorieChoisie == "Full") alors {
+            score = 25
+        }
+    }
+
+    retourner score
+}
